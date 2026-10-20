@@ -8,221 +8,163 @@
 
 <style>
 :root {
-  --bg: #0b0912;
-  --card: #171323;
-  --purple: #9d4dff;
-  --pink: #ff48ca;
-  --muted: #b8afc9;
+  --bg:#0b0912;
+  --card:#171323;
+  --purple:#9d4dff;
+  --pink:#ff48ca;
+  --muted:#b8afc9;
 }
-
-* { box-sizing: border-box; }
-
+* { box-sizing:border-box; }
 body {
-  margin: 0;
-  background: var(--bg);
-  color: white;
-  font-family: Arial, sans-serif;
+  margin:0;
+  background:var(--bg);
+  color:white;
+  font-family:Arial,sans-serif;
 }
-
 header {
-  padding: 20px 6%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  flex-wrap: wrap;
-  border-bottom: 1px solid #30243e;
+  padding:20px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+  border-bottom:1px solid #30243e;
 }
-
-.logo {
-  font-size: 22px;
-  font-weight: 900;
+.logo { font-size:22px; font-weight:900; }
+.logo span { color:var(--pink); }
+nav,.filters,.tools {
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
 }
-
-.logo span { color: var(--pink); }
-
-nav {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+button,input,select { font:inherit; }
+button { cursor:pointer; }
+nav button,.filter {
+  background:#21182e;
+  color:white;
+  border:1px solid #423054;
+  padding:10px 13px;
+  border-radius:10px;
 }
-
-button, input, select { font: inherit; }
-
-nav button, .filter {
-  background: #21182e;
-  color: white;
-  border: 1px solid #423054;
-  padding: 11px 15px;
-  border-radius: 10px;
-  cursor: pointer;
+nav button.active,.filter.active {
+  background:var(--purple);
+  border-color:var(--pink);
 }
-
-nav button.active, .filter.active {
-  background: var(--purple);
-}
-
 .hero {
-  text-align: center;
-  padding: 65px 18px;
-  background: radial-gradient(ellipse at top, #492064, var(--bg) 72%);
+  text-align:center;
+  padding:55px 18px;
+  background:radial-gradient(ellipse at top,#492064,var(--bg) 72%);
 }
-
-.hero h1 {
-  font-size: clamp(36px, 7vw, 64px);
-  margin: 20px 0;
+.hero h1 { font-size:clamp(34px,7vw,62px); margin:20px 0; }
+.hero h1 span { color:var(--pink); }
+.hero p,.muted { color:var(--muted); line-height:1.6; }
+main { max-width:1400px; margin:auto; padding:30px 5%; }
+.panel { display:none; }
+.panel.active { display:block; }
+.tools { margin:20px 0; }
+.tools input,.tools select {
+  flex:1;
+  min-width:180px;
+  padding:13px;
+  background:var(--card);
+  color:white;
+  border:1px solid #423054;
+  border-radius:10px;
 }
-
-.hero h1 span { color: var(--pink); }
-
-.hero p, .muted {
-  color: var(--muted);
-  line-height: 1.6;
+.filter-section {
+  margin:18px 0;
+  padding:17px;
+  background:#110d1b;
+  border:1px solid #30243e;
+  border-radius:14px;
 }
-
-main {
-  max-width: 1400px;
-  margin: auto;
-  padding: 30px 5%;
-}
-
-.panel { display: none; }
-.panel.active { display: block; }
-
-.tools {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin: 20px 0;
-}
-
-.tools input, .tools select {
-  flex: 1;
-  min-width: 180px;
-  padding: 13px;
-  background: var(--card);
-  color: white;
-  border: 1px solid #423054;
-  border-radius: 10px;
-}
-
-.filters {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 22px;
-}
-
+.filter-section h3 { margin:0 0 13px; }
+.filters { margin-bottom:4px; }
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  gap: 16px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
+  gap:16px;
+  margin-top:20px;
 }
-
 .card {
-  background: var(--card);
-  border: 1px solid #30243e;
-  border-radius: 15px;
-  overflow: hidden;
-  transition: .2s;
+  background:var(--card);
+  border:1px solid #30243e;
+  border-radius:15px;
+  overflow:hidden;
+  transition:.2s;
 }
-
-.card:hover {
-  transform: translateY(-4px);
-  border-color: var(--purple);
-}
-
+.card:hover { transform:translateY(-4px); border-color:var(--purple); }
 .art {
-  height: 190px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, #34204d, #191025);
-  font-size: 60px;
-  overflow: hidden;
-  position: relative;
+  height:190px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#34204d,#191025);
+  overflow:hidden;
 }
-
 .art img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  padding: 10px;
-  display: block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  padding:10px;
 }
-
-.art .fallback {
-  display: none;
-  font-size: 65px;
+.fallback { font-size:65px; }
+.info { padding:15px; }
+.info h3 { font-size:16px; margin:0 0 10px; overflow-wrap:anywhere; }
+.rarity,.mutation-label {
+  display:inline-block;
+  padding:5px 8px;
+  border-radius:7px;
+  font-size:11px;
+  margin:2px 3px 2px 0;
+  background:#352344;
+  color:#e2c7ff;
 }
-
-.info { padding: 15px; }
-
-.info h3 {
-  font-size: 16px;
-  margin: 0 0 10px;
-  overflow-wrap: anywhere;
-}
-
-.rarity {
-  display: inline-block;
-  background: #352344;
-  color: #e2c7ff;
-  padding: 5px 8px;
-  border-radius: 7px;
-  font-size: 11px;
-}
-
-.price {
-  font-size: 21px;
-  font-weight: bold;
-  margin: 15px 0;
-}
-
+.mutation-label { background:#46203f; color:#ffb8eb; }
+.price { font-size:20px; font-weight:bold; margin:15px 0; }
 .buy {
-  width: 100%;
-  padding: 12px;
-  background: var(--purple);
-  color: white;
-  border: 0;
-  border-radius: 9px;
-  font-weight: bold;
-  cursor: pointer;
+  width:100%;
+  padding:12px;
+  background:var(--purple);
+  color:white;
+  border:0;
+  border-radius:9px;
+  font-weight:bold;
 }
-
-.buy:hover { background: var(--pink); }
-
+.buy:hover { background:var(--pink); }
 .notice {
-  padding: 16px;
-  background: #171323;
-  border: 1px solid #30243e;
-  border-radius: 12px;
-  color: var(--muted);
-  line-height: 1.6;
-  margin: 20px 0;
+  padding:16px;
+  background:var(--card);
+  border:1px solid #30243e;
+  border-radius:12px;
+  color:var(--muted);
+  line-height:1.6;
+  margin:20px 0;
 }
-
+.no-results {
+  grid-column:1/-1;
+  text-align:center;
+  color:var(--muted);
+  padding:25px;
+}
 footer {
-  text-align: center;
-  padding: 30px;
-  color: var(--muted);
-  border-top: 1px solid #30243e;
-  font-size: 13px;
+  text-align:center;
+  padding:30px;
+  color:var(--muted);
+  border-top:1px solid #30243e;
+  font-size:13px;
 }
-
-@media (max-width: 500px) {
-  header { justify-content: center; }
-  .logo { text-align: center; }
-  nav { justify-content: center; }
-  .art { height: 165px; }
+@media(max-width:500px) {
+  header { justify-content:center; }
+  .logo { text-align:center; }
+  nav { justify-content:center; }
+  .art { height:165px; }
 }
 </style>
 </head>
 
 <body>
-
 <header>
   <div class="logo">🧠 BRAINROT<span> STORE</span></div>
-
   <nav>
     <button class="active" data-tab="brainrots">🧠 Brainrots</button>
     <button data-tab="robux">💎 Robux</button>
@@ -237,75 +179,77 @@ footer {
 </div>
 
 <main>
-
 <section class="panel active" id="brainrots">
   <h2>🧠 Catálogo de Brainrots</h2>
   <p class="muted" id="status">Carregando catálogo...</p>
 
   <div class="tools">
     <input id="search" placeholder="🔎 Buscar Brainrot pelo nome...">
-
-    <select id="rarity">
-      <option value="">Todas as raridades</option>
-      <option>Common</option>
-      <option>Rare</option>
-      <option>Epic</option>
-      <option>Legendary</option>
-      <option>Mythic</option>
-      <option>Brainrot God</option>
-      <option>God</option>
-      <option>Secret</option>
-      <option>OG</option>
-      <option>Misc</option>
-    </select>
   </div>
 
-  <div class="filters">
-    <button class="filter active" data-rarity="">Todos</button>
-    <button class="filter" data-rarity="Common">Common</button>
-    <button class="filter" data-rarity="Rare">Rare</button>
-    <button class="filter" data-rarity="Epic">Epic</button>
-    <button class="filter" data-rarity="Legendary">Legendary</button>
-    <button class="filter" data-rarity="Mythic">Mythic</button>
-    <button class="filter" data-rarity="Brainrot God">Brainrot God</button>
-    <button class="filter" data-rarity="Secret">Secret</button>
-    <button class="filter" data-rarity="OG">OG</button>
+  <div class="filter-section">
+    <h3>📂 Categorias</h3>
+    <div class="filters" id="categoryFilters">
+      <button class="filter active" data-rarity="">Todas</button>
+      <button class="filter" data-rarity="Common">Common</button>
+      <button class="filter" data-rarity="Rare">Rare</button>
+      <button class="filter" data-rarity="Epic">Epic</button>
+      <button class="filter" data-rarity="Legendary">Legendary</button>
+      <button class="filter" data-rarity="Mythic">Mythic</button>
+      <button class="filter" data-rarity="Brainrot God">Brainrot God</button>
+      <button class="filter" data-rarity="God">God</button>
+      <button class="filter" data-rarity="Secret">Secret</button>
+      <button class="filter" data-rarity="OG">OG</button>
+      <button class="filter" data-rarity="Misc">Misc</button>
+    </div>
   </div>
 
+  <div class="filter-section">
+    <h3>🧬 Mutações</h3>
+    <div class="filters" id="mutationFilters">
+      <button class="filter active" data-mutation="">Todas</button>
+      <button class="filter" data-mutation="Default">Normal</button>
+      <button class="filter" data-mutation="Gold">Gold</button>
+      <button class="filter" data-mutation="Diamond">Diamond</button>
+      <button class="filter" data-mutation="Rainbow">Rainbow</button>
+      <button class="filter" data-mutation="Bloodrot">Bloodrot</button>
+      <button class="filter" data-mutation="Candy">Candy</button>
+      <button class="filter" data-mutation="Lava">Lava</button>
+      <button class="filter" data-mutation="Galaxy">Galaxy</button>
+      <button class="filter" data-mutation="Yin Yang">Yin Yang</button>
+      <button class="filter" data-mutation="Radioactive">Radioactive</button>
+      <button class="filter" data-mutation="Cursed">Cursed</button>
+      <button class="filter" data-mutation="Divine">Divine</button>
+      <button class="filter" data-mutation="Cyber">Cyber</button>
+      <button class="filter" data-mutation="Phantom">Phantom</button>
+      <button class="filter" data-mutation="Crystal">Crystal</button>
+      <button class="filter" data-mutation="Eclipse">Eclipse</button>
+    </div>
+  </div>
+
+  <p class="muted">Os filtros ajudam a localizar os personagens. Confirme a disponibilidade e o preço antes de comprar.</p>
   <div class="grid" id="catalog"></div>
 </section>
 
 <section class="panel" id="robux">
   <h2>💎 Robux</h2>
-  <p class="muted">Consulte as opções para adquirir Robux.</p>
-
+  <p class="muted">Consulte as opções oficiais de Robux.</p>
   <div class="notice">
-    Os pacotes abaixo são apenas categorias de exemplo.
-    Confira os valores e compre Robux pelos canais oficiais.
+    Os valores dos pacotes variam conforme a plataforma e a região.
+    Confira os preços diretamente no Roblox oficial.
   </div>
-
   <div class="grid" id="robuxGrid"></div>
 </section>
 
 <section class="panel" id="contato">
   <h2>📞 Atendimento</h2>
-
   <div class="notice">
-    Para consultar um produto, use os botões da loja.
-    Configure seu WhatsApp no código antes de publicar.
+    Clique em “Consultar produto” em um Brainrot para iniciar uma consulta.
+    Para habilitar o atendimento automático, configure seu WhatsApp no código.
     Nunca peça a senha da conta Roblox de um cliente.
   </div>
-
-  <p>
-    <a href="https://www.roblox.com/"
-       target="_blank"
-       rel="noopener noreferrer"
-       style="color:#d6aaff">
-       Acessar o Roblox oficial
-    </a>
-  </p>
+  <p><a href="https://www.roblox.com/" target="_blank" rel="noopener noreferrer" style="color:#d6aaff">Acessar o Roblox oficial</a></p>
 </section>
-
 </main>
 
 <footer>
@@ -313,103 +257,107 @@ footer {
 </footer>
 
 <script>
-/* Coloque seu WhatsApp com DDI e DDD, somente números.
+/* Configure com DDI + DDD + número, somente dígitos.
    Exemplo de formato: 5511999999999 */
 const WHATSAPP = "";
 
 const exemplos = [
-  ["Noobini Pizzanini", "Common"],
-  ["Tim Cheese", "Common"],
-  ["Lirilì Larilà", "Common"],
-  ["Fluriflura", "Common"],
-  ["Trippi Troppi", "Rare"],
-  ["Bandito Bobritto", "Rare"],
-  ["Cappuccino Assassino", "Epic"],
-  ["Brr Brr Patapim", "Epic"],
-  ["Ballerina Cappuccina", "Legendary"],
-  ["Burbaloni Loliloli", "Legendary"],
-  ["Chimpanzini Bananini", "Legendary"],
-  ["Tung Tung Tung Sahur", "Mythic"],
-  ["Bombardiro Crocodilo", "Mythic"],
-  ["Gorilla Watermelondrillo", "Brainrot God"],
-  ["Cocofanto Elefanto", "Brainrot God"],
-  ["La Vacca Saturno Saturnita", "Secret"],
-  ["Strawberry Elephant", "OG"],
-  ["Meowl", "OG"]
-].map(([name, rarity]) => ({ name, rarity }));
+  ["Noobini Pizzanini","Common"],
+  ["Tim Cheese","Common"],
+  ["Lirilì Larilà","Common"],
+  ["Fluriflura","Common"],
+  ["Trippi Troppi","Rare"],
+  ["Bandito Bobritto","Rare"],
+  ["Cappuccino Assassino","Epic"],
+  ["Brr Brr Patapim","Epic"],
+  ["Ballerina Cappuccina","Legendary"],
+  ["Burbaloni Loliloli","Legendary"],
+  ["Chimpanzini Bananini","Legendary"],
+  ["Tung Tung Tung Sahur","Mythic"],
+  ["Bombardiro Crocodilo","Mythic"],
+  ["Gorilla Watermelondrillo","Brainrot God"],
+  ["Cocofanto Elefanto","Brainrot God"],
+  ["La Vacca Saturno Saturnita","Secret"],
+  ["Strawberry Elephant","OG"],
+  ["Meowl","OG"]
+].map(([name,rarity]) => ({name,rarity}));
 
 let brainrots = [];
 let filtroRapido = "";
+let filtroMutacao = "";
 
 function nomeItem(item) {
   return item.name || item.nome || item.title ||
-         item.brainrot || item.displayName || "Brainrot";
+    item.brainrot || item.displayName || "Brainrot";
 }
 
 function raridadeItem(item) {
   return item.rarity || item.raridade || item.tier ||
-         item.rarityName || "Outros";
+    item.rarityName || "Outros";
 }
 
-/* Tenta reconhecer diferentes nomes de campos de imagem
-   que podem existir no catálogo. */
+function mutacaoItem(item) {
+  return item.mutation || item.mutacao ||
+    item.mutationName || item.variant || item.variation || "";
+}
+
 function imagemItem(item) {
   const possiveis = [
-    item.image_url,
-    item.imageUrl,
-    item.image,
-    item.thumbnail,
-    item.thumbnailUrl,
-    item.icon,
-    item.img,
-    item.picture,
-    item.imageURL,
-    item.image_link,
-    item.imageLink
+    item.image_url, item.imageUrl, item.image,
+    item.thumbnail, item.thumbnailUrl, item.icon,
+    item.img, item.picture, item.imageURL
   ];
 
   for (const valor of possiveis) {
-    if (typeof valor === "string" &&
-        /^https?:\/\//i.test(valor)) {
+    if (typeof valor === "string" && /^https?:\/\//i.test(valor)) {
       return valor;
     }
-
     if (valor && typeof valor === "object") {
       const url = valor.url || valor.src || valor.uri;
-      if (typeof url === "string" &&
-          /^https?:\/\//i.test(url)) {
+      if (typeof url === "string" && /^https?:\/\//i.test(url)) {
         return url;
       }
     }
   }
-
   return "";
 }
 
 function criarImagem(item, art) {
-  const img = document.createElement("img");
   const fallback = document.createElement("div");
-
   fallback.className = "fallback";
   fallback.textContent = "🧠";
 
-  img.alt = nomeItem(item);
-  img.loading = "lazy";
-
-  img.onerror = () => {
-    img.remove();
-    fallback.style.display = "block";
-  };
-
   const url = imagemItem(item);
-
-  if (url) {
-    img.src = url;
-  } else {
-    fallback.style.display = "block";
+  if (!url) {
+    art.appendChild(fallback);
+    return;
   }
 
-  art.append(img, fallback);
+  const img = document.createElement("img");
+  img.alt = nomeItem(item);
+  img.loading = "lazy";
+  img.src = url;
+  img.onerror = () => {
+    img.remove();
+    if (!art.contains(fallback)) art.appendChild(fallback);
+  };
+  art.appendChild(img);
+}
+
+function consultar(nome, categoria, mutacao = "") {
+  const variante = mutacao && mutacao !== "Default"
+    ? `, mutação ${mutacao}` : "";
+  const msg = `Olá! Quero consultar ${nome}${variante} (${categoria}) na Brainrot Store.`;
+
+  if (WHATSAPP) {
+    window.open(
+      "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg),
+      "_blank",
+      "noopener,noreferrer"
+    );
+  } else {
+    alert(msg + "\n\nO atendimento ainda não foi configurado.");
+  }
 }
 
 function cardBrainrot(item) {
@@ -430,148 +378,139 @@ function cardBrainrot(item) {
   tag.className = "rarity";
   tag.textContent = raridadeItem(item);
 
+  info.append(h, tag);
+
+  const mutacaoOriginal = mutacaoItem(item);
+  const mutacaoExibida = filtroMutacao || mutacaoOriginal;
+
+  if (mutacaoExibida) {
+    const mutacaoTag = document.createElement("span");
+    mutacaoTag.className = "mutation-label";
+    mutacaoTag.textContent = mutacaoExibida === "Default"
+      ? "Normal" : mutacaoExibida;
+    info.appendChild(mutacaoTag);
+  }
+
   const price = document.createElement("div");
   price.className = "price";
-  price.textContent = "Consultar preço";
+  price.textContent = item.price || item.preco || "Consultar preço";
 
   const btn = document.createElement("button");
   btn.className = "buy";
   btn.textContent = "Consultar produto";
-  btn.onclick = () => consultar(nomeItem(item), "Brainrot");
+  btn.onclick = () => consultar(
+    nomeItem(item),
+    raridadeItem(item),
+    mutacaoExibida
+  );
 
-  info.append(h, tag, price, btn);
+  info.append(price, btn);
   card.append(art, info);
-
   return card;
-}
-
-function consultar(nome, categoria) {
-  const msg = `Olá! Quero consultar ${nome} (${categoria}) na Brainrot Store.`;
-
-  if (WHATSAPP) {
-    window.open(
-      "https://wa.me/" + WHATSAPP + "?text=" +
-      encodeURIComponent(msg),
-      "_blank",
-      "noopener,noreferrer"
-    );
-  } else {
-    alert(msg + "\n\nO atendimento ainda não foi configurado.");
-  }
 }
 
 function renderCatalog() {
   const grid = document.getElementById("catalog");
-  const q = document.getElementById("search").value
-    .trim().toLowerCase();
-
-  const rarity = document.getElementById("rarity").value ||
-    filtroRapido;
-
+  const q = document.getElementById("search").value.trim().toLowerCase();
   grid.replaceChildren();
 
-  const encontrados = brainrots.filter(item =>
-    nomeItem(item).toLowerCase().includes(q) &&
-    (!rarity ||
-      raridadeItem(item).toLowerCase() === rarity.toLowerCase())
-  );
+  const encontrados = brainrots.filter(item => {
+    const nome = nomeItem(item).toLowerCase();
+    const raridade = raridadeItem(item).toLowerCase();
+    const mutacao = mutacaoItem(item).toLowerCase();
 
-  encontrados.forEach(item => {
-    grid.appendChild(cardBrainrot(item));
+    const nomeOK = nome.includes(q);
+    const categoriaOK = !filtroRapido ||
+      raridade === filtroRapido.toLowerCase();
+
+    /* A mutação selecionada funciona como variante para consulta.
+       Se a fonte tiver mutações cadastradas, elas também são filtradas. */
+    const mutacaoOK = !filtroMutacao ||
+      filtroMutacao === "Default" ||
+      !mutacao ||
+      mutacao === filtroMutacao.toLowerCase();
+
+    return nomeOK && categoriaOK && mutacaoOK;
   });
-
-  document.getElementById("status").textContent =
-    encontrados.length + " Brainrots encontrados no catálogo carregado.";
 
   if (!encontrados.length) {
-    grid.textContent = "Nenhum Brainrot encontrado. Tente outra busca.";
-  }
-}
-
-async function carregarCatalogo() {
-  const url =
-    "https://raw.githubusercontent.com/jwcool3/BR-Tracker/main/app/public/brainrots.json";
-
-  try {
-    const resposta = await fetch(url);
-
-    if (!resposta.ok) {
-      throw new Error("Catálogo indisponível");
-    }
-
-    const dados = await resposta.json();
-
-    const lista = Array.isArray(dados) ? dados :
-      (dados.brainrots || dados.items || dados.data || []);
-
-    if (!Array.isArray(lista) || !lista.length) {
-      throw new Error("Formato inesperado");
-    }
-
-    brainrots = lista;
-
-    document.getElementById("status").textContent =
-      "Catálogo comunitário carregado. As imagens dependem dos links fornecidos pela fonte.";
-
-  } catch (e) {
-    brainrots = exemplos;
-
-    document.getElementById("status").textContent =
-      "Não foi possível carregar o catálogo completo. Mostrando personagens de exemplo.";
+    const vazio = document.createElement("div");
+    vazio.className = "no-results";
+    vazio.textContent = "Nenhum Brainrot encontrado com esses filtros.";
+    grid.appendChild(vazio);
+  } else {
+    encontrados.forEach(item => grid.appendChild(cardBrainrot(item)));
   }
 
-  renderCatalog();
+  document.getElementById("status").textContent =
+    encontrados.length + " Brainrots encontrados.";
 }
 
-document.getElementById("search")
-  .addEventListener("input", renderCatalog);
-
-document.getElementById("rarity")
-  .addEventListener("change", () => {
-    filtroRapido = "";
-
-    document.querySelectorAll(".filter")
-      .forEach(b => b.classList.remove("active"));
-
-    document.querySelector('[data-rarity=""]')
-      .classList.add("active");
-
-    renderCatalog();
+function atualizarBotoes(containerId, atributo, valor) {
+  document.querySelectorAll(`#${containerId} .filter`).forEach(btn => {
+    btn.classList.toggle("active", btn.dataset[atributo] === valor);
   });
+}
 
-document.querySelectorAll(".filter").forEach(btn => {
+document.getElementById("search").addEventListener("input", renderCatalog);
+
+document.querySelectorAll("#categoryFilters .filter").forEach(btn => {
   btn.addEventListener("click", () => {
     filtroRapido = btn.dataset.rarity;
-    document.getElementById("rarity").value = "";
+    atualizarBotoes("categoryFilters", "rarity", filtroRapido);
+    renderCatalog();
+  });
+});
 
-    document.querySelectorAll(".filter")
-      .forEach(b => b.classList.remove("active"));
-
-    btn.classList.add("active");
+document.querySelectorAll("#mutationFilters .filter").forEach(btn => {
+  btn.addEventListener("click", () => {
+    filtroMutacao = btn.dataset.mutation;
+    atualizarBotoes("mutationFilters", "mutation", filtroMutacao);
     renderCatalog();
   });
 });
 
 document.querySelectorAll("nav button").forEach(btn => {
   btn.addEventListener("click", () => {
-    document.querySelectorAll("nav button")
-      .forEach(b => b.classList.remove("active"));
-
-    document.querySelectorAll(".panel")
-      .forEach(p => p.classList.remove("active"));
-
+    document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
     btn.classList.add("active");
-
-    document.getElementById(btn.dataset.tab)
-      .classList.add("active");
+    document.getElementById(btn.dataset.tab).classList.add("active");
   });
 });
 
-/* Pacotes demonstrativos: os valores não são preços reais. */
+async function carregarCatalogo() {
+  const url = "https://raw.githubusercontent.com/jwcool3/BR-Tracker/main/app/public/brainrots.json";
+
+  try {
+    const resposta = await fetch(url);
+    if (!resposta.ok) throw new Error("Catálogo indisponível");
+
+    const dados = await resposta.json();
+    const lista = Array.isArray(dados)
+      ? dados
+      : (dados.brainrots || dados.items || dados.data || []);
+
+    if (!Array.isArray(lista) || !lista.length) {
+      throw new Error("Formato inesperado");
+    }
+
+    brainrots = lista;
+    document.getElementById("status").textContent =
+      "Catálogo comunitário carregado. As imagens dependem da fonte.";
+  } catch (erro) {
+    brainrots = exemplos;
+    document.getElementById("status").textContent =
+      "Catálogo de demonstração: a fonte externa não carregou.";
+  }
+
+  renderCatalog();
+}
+
 const pacotes = [
-  { nome: "Robux — pacote básico", emoji: "💎" },
-  { nome: "Robux — pacote intermediário", emoji: "💰" },
-  { nome: "Robux — pacote especial", emoji: "✨" }
+  {nome:"Consultar Robux",emoji:"💎"},
+  {nome:"Pacotes de Robux",emoji:"💰"},
+  {nome:"Robux pelo canal oficial",emoji:"✨"}
 ];
 
 const robuxGrid = document.getElementById("robuxGrid");
@@ -610,6 +549,5 @@ pacotes.forEach(p => {
 
 carregarCatalogo();
 </script>
-
 </body>
 </html>
