@@ -243,22 +243,9 @@ h2 { font-size: 28px; }
 }
 
 .buy:hover { filter: brightness(1.12); }
-.buy:focus-visible, button:focus-visible, a:focus-visible {
+.buy:focus-visible, button:focus-visible {
   outline: 2px solid white;
   outline-offset: 3px;
-}
-
-.secondary {
-  display: block;
-  width: 100%;
-  padding: 13px;
-  margin-top: 12px;
-  text-align: center;
-  text-decoration: none;
-  color: white;
-  background: #21182e;
-  border: 1px solid #49305e;
-  border-radius: 12px;
 }
 
 .notice {
@@ -384,6 +371,7 @@ footer {
       <button type="button" class="buy" id="pedir">
         📲 Solicitar pelo WhatsApp
       </button>
+    </div>
 
     <div class="notice">
       <strong>Importante:</strong> o preço exibido é uma simulação
@@ -409,6 +397,7 @@ footer {
           Abrir atendimento
         </button>
       </div>
+    </div>
 
     <div class="notice">
       Nunca compartilhe sua senha, códigos de verificação ou dados
@@ -427,7 +416,6 @@ footer {
 <script>
 "use strict";
 
-/* Número do WhatsApp com DDI + DDD, somente dígitos. */
 const WHATSAPP = "5511974331932";
 
 const PRECO_POR_100 = 6;
@@ -465,7 +453,6 @@ function obterQuantidade() {
 
 function atualizarPreco() {
   const quantidade = obterQuantidade();
-
   quantidadeInput.value = quantidade;
 
   const preco = quantidade / PASSO * PRECO_POR_100;
@@ -495,6 +482,7 @@ document.getElementById("aumentar").addEventListener("click", () => {
 });
 
 quantidadeInput.addEventListener("change", atualizarPreco);
+
 quantidadeInput.addEventListener("input", () => {
   if (quantidadeInput.value !== "") {
     const quantidade = Number(quantidadeInput.value);
