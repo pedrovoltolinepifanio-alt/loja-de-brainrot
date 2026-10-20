@@ -4,550 +4,579 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Brainrot Store</title>
+<meta name="theme-color" content="#0b0912">
+<meta name="description" content="Loja de Robux. Consulte quantidades e preços e entre em contato pelo WhatsApp.">
+<title>Robux Store | Sua Loja Gamer</title>
 
 <style>
 :root {
-  --bg:#0b0912;
-  --card:#171323;
-  --purple:#9d4dff;
-  --pink:#ff48ca;
-  --muted:#b8afc9;
+  --bg: #0b0912;
+  --card: #171323;
+  --purple: #9d4dff;
+  --pink: #ff48ca;
+  --muted: #b8afc9;
+  --border: #30243e;
 }
-* { box-sizing:border-box; }
+* { box-sizing: border-box; }
+
 body {
-  margin:0;
-  background:var(--bg);
-  color:white;
-  font-family:Arial,sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: white;
+  font-family: Arial, sans-serif;
 }
+
 header {
-  padding:20px 5%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  flex-wrap:wrap;
-  border-bottom:1px solid #30243e;
+  padding: 20px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
 }
-.logo { font-size:22px; font-weight:900; }
-.logo span { color:var(--pink); }
-nav,.filters,.tools {
-  display:flex;
-  gap:9px;
-  flex-wrap:wrap;
+
+.logo {
+  font-size: 24px;
+  font-weight: 900;
 }
-button,input,select { font:inherit; }
-button { cursor:pointer; }
-nav button,.filter {
-  background:#21182e;
-  color:white;
-  border:1px solid #423054;
-  padding:10px 13px;
-  border-radius:10px;
+.logo span { color: var(--pink); }
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
 }
-nav button.active,.filter.active {
-  background:var(--purple);
-  border-color:var(--pink);
+
+button, input { font: inherit; }
+button { cursor: pointer; }
+
+nav button {
+  padding: 11px 15px;
+  border-radius: 10px;
+  background: #21182e;
+  color: white;
+  border: 1px solid #423054;
 }
+
+nav button.active,
+nav button:hover {
+  background: var(--purple);
+  border-color: var(--pink);
+}
+
 .hero {
-  text-align:center;
-  padding:55px 18px;
-  background:radial-gradient(ellipse at top,#492064,var(--bg) 72%);
+  text-align: center;
+  padding: 70px 18px;
+  background: radial-gradient(ellipse at top, #492064, var(--bg) 72%);
 }
-.hero h1 { font-size:clamp(34px,7vw,62px); margin:20px 0; }
-.hero h1 span { color:var(--pink); }
-.hero p,.muted { color:var(--muted); line-height:1.6; }
-main { max-width:1400px; margin:auto; padding:30px 5%; }
-.panel { display:none; }
-.panel.active { display:block; }
-.tools { margin:20px 0; }
-.tools input,.tools select {
-  flex:1;
-  min-width:180px;
-  padding:13px;
-  background:var(--card);
-  color:white;
-  border:1px solid #423054;
-  border-radius:10px;
+
+.hero .eyebrow {
+  color: #e3c4ff;
+  font-weight: bold;
+  letter-spacing: 2px;
 }
-.filter-section {
-  margin:18px 0;
-  padding:17px;
-  background:#110d1b;
-  border:1px solid #30243e;
-  border-radius:14px;
+
+.hero h1 {
+  font-size: clamp(36px, 7vw, 66px);
+  margin: 22px 0;
+  line-height: 1.08;
 }
-.filter-section h3 { margin:0 0 13px; }
-.filters { margin-bottom:4px; }
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
-  gap:16px;
-  margin-top:20px;
+
+.hero h1 span { color: var(--pink); }
+
+.hero p, .muted {
+  color: var(--muted);
+  line-height: 1.7;
 }
-.card {
-  background:var(--card);
-  border:1px solid #30243e;
-  border-radius:15px;
-  overflow:hidden;
-  transition:.2s;
+
+main {
+  max-width: 1050px;
+  margin: auto;
+  padding: 35px 5%;
 }
-.card:hover { transform:translateY(-4px); border-color:var(--purple); }
-.art {
-  height:190px;
-  display:grid;
-  place-items:center;
-  background:linear-gradient(135deg,#34204d,#191025);
-  overflow:hidden;
+
+.panel { display: none; }
+.panel.active { display: block; }
+
+h2 { font-size: 28px; }
+
+.shop-card {
+  margin-top: 24px;
+  padding: clamp(20px, 5vw, 36px);
+  border-radius: 20px;
+  background: linear-gradient(145deg, #20132f, #15101f);
+  border: 1px solid #49305e;
+  box-shadow: 0 12px 40px #0004;
 }
-.art img {
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  padding:10px;
+
+.robux-icon {
+  display: grid;
+  place-items: center;
+  width: 85px;
+  height: 85px;
+  margin: 0 auto 20px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, var(--purple), var(--pink));
+  font-size: 42px;
 }
-.fallback { font-size:65px; }
-.info { padding:15px; }
-.info h3 { font-size:16px; margin:0 0 10px; overflow-wrap:anywhere; }
-.rarity,.mutation-label {
-  display:inline-block;
-  padding:5px 8px;
-  border-radius:7px;
-  font-size:11px;
-  margin:2px 3px 2px 0;
-  background:#352344;
-  color:#e2c7ff;
+
+.shop-card h2, .shop-card .description {
+  text-align: center;
 }
-.mutation-label { background:#46203f; color:#ffb8eb; }
-.price { font-size:20px; font-weight:bold; margin:15px 0; }
+
+.description {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.price-info {
+  text-align: center;
+  margin: 28px 0;
+  padding: 17px;
+  background: #100c19;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.price-info strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--pink);
+  font-size: 27px;
+}
+
+.quantity-label {
+  display: block;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 10px;
+}
+
+.quantity-control button {
+  width: 52px;
+  min-height: 52px;
+  flex-shrink: 0;
+  border: 1px solid #65418a;
+  background: #2b1b3c;
+  color: white;
+  border-radius: 12px;
+  font-size: 25px;
+}
+
+.quantity-control input {
+  width: 100%;
+  min-width: 0;
+  max-width: 280px;
+  text-align: center;
+  color: white;
+  background: #100c19;
+  border: 1px solid #65418a;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 21px;
+  font-weight: bold;
+}
+
+.quantity-control input:focus {
+  outline: 2px solid var(--purple);
+}
+
+.quick-quantities {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.quick-quantities button {
+  padding: 9px 12px;
+  border: 1px solid #423054;
+  background: #21182e;
+  color: white;
+  border-radius: 9px;
+}
+
+.quick-quantities button:hover {
+  border-color: var(--pink);
+}
+
+.total {
+  text-align: center;
+  margin: 30px 0 20px;
+  padding: 24px 10px;
+  border-radius: 15px;
+  background: #100c19;
+}
+
+.total small {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.total strong {
+  display: block;
+  margin-top: 10px;
+  color: #c99aff;
+  font-size: clamp(35px, 8vw, 48px);
+  overflow-wrap: anywhere;
+}
+
 .buy {
-  width:100%;
-  padding:12px;
-  background:var(--purple);
-  color:white;
-  border:0;
-  border-radius:9px;
-  font-weight:bold;
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(90deg, var(--purple), var(--pink));
+  color: white;
+  border: 0;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 16px;
+  transition: .2s;
 }
-.buy:hover { background:var(--pink); }
+
+.buy:hover { filter: brightness(1.12); }
+.buy:focus-visible, button:focus-visible, a:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 3px;
+}
+
+.secondary {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  margin-top: 12px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  background: #21182e;
+  border: 1px solid #49305e;
+  border-radius: 12px;
+}
+
 .notice {
-  padding:16px;
-  background:var(--card);
-  border:1px solid #30243e;
-  border-radius:12px;
-  color:var(--muted);
-  line-height:1.6;
-  margin:20px 0;
+  padding: 17px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 22px 0;
 }
-.no-results {
-  grid-column:1/-1;
-  text-align:center;
-  color:var(--muted);
-  padding:25px;
+
+.contact-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 25px;
 }
+
+.contact-item {
+  padding: 20px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+}
+
+.contact-item h3 { margin-top: 0; }
+
 footer {
-  text-align:center;
-  padding:30px;
-  color:var(--muted);
-  border-top:1px solid #30243e;
-  font-size:13px;
+  text-align: center;
+  padding: 30px 18px;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  line-height: 1.8;
 }
-@media(max-width:500px) {
-  header { justify-content:center; }
-  .logo { text-align:center; }
-  nav { justify-content:center; }
-  .art { height:165px; }
+
+@media(max-width: 550px) {
+  header { justify-content: center; }
+  .logo { text-align: center; }
+  nav { justify-content: center; }
+  nav button { padding: 10px; }
+  .hero { padding: 48px 15px; }
+  main { padding: 25px 4%; }
+  .quantity-control { gap: 6px; }
+  .quantity-control button { width: 46px; }
 }
 </style>
 </head>
 
 <body>
+
 <header>
-  <div class="logo">🧠 BRAINROT<span> STORE</span></div>
-  <nav>
-    <button class="active" data-tab="brainrots">🧠 Brainrots</button>
-    <button data-tab="robux">💎 Robux</button>
+  <div class="logo">💎 ROBUX<span> STORE</span></div>
+
+  <nav aria-label="Navegação principal">
+    <button class="active" data-tab="robux">💎 Comprar Robux</button>
     <button data-tab="contato">📞 Contato</button>
   </nav>
 </header>
 
-<div class="hero">
-  <div>🎮 SUA LOJA GAMER</div>
-  <h1>SUBA DE NÍVEL<br><span>NO ROBLOX</span></h1>
-  <p>Encontre seus Brainrots favoritos e consulte os produtos disponíveis.</p>
-</div>
+<section class="hero">
+  <div class="eyebrow">🎮 SUA LOJA GAMER</div>
+  <h1>SEU UNIVERSO<br><span>É NO ROBLOX</span></h1>
+  <p>Escolha a quantidade de Robux e consulte seu pedido pelo WhatsApp.</p>
+</section>
 
 <main>
-<section class="panel active" id="brainrots">
-  <h2>🧠 Catálogo de Brainrots</h2>
-  <p class="muted" id="status">Carregando catálogo...</p>
 
-  <div class="tools">
-    <input id="search" placeholder="🔎 Buscar Brainrot pelo nome...">
-  </div>
+  <section class="panel active" id="robux">
+    <div class="shop-card">
+      <div class="robux-icon" aria-hidden="true">💎</div>
 
-  <div class="filter-section">
-    <h3>📂 Categorias</h3>
-    <div class="filters" id="categoryFilters">
-      <button class="filter active" data-rarity="">Todas</button>
-      <button class="filter" data-rarity="Common">Common</button>
-      <button class="filter" data-rarity="Rare">Rare</button>
-      <button class="filter" data-rarity="Epic">Epic</button>
-      <button class="filter" data-rarity="Legendary">Legendary</button>
-      <button class="filter" data-rarity="Mythic">Mythic</button>
-      <button class="filter" data-rarity="Brainrot God">Brainrot God</button>
-      <button class="filter" data-rarity="God">God</button>
-      <button class="filter" data-rarity="Secret">Secret</button>
-      <button class="filter" data-rarity="OG">OG</button>
-      <button class="filter" data-rarity="Misc">Misc</button>
+      <h2>Comprar Robux</h2>
+      <p class="description">
+        Você escolhe a quantidade. O preço é calculado automaticamente.
+      </p>
+
+      <div class="price-info">
+        Preço por 100 Robux
+        <strong>R$ 6,00</strong>
+      </div>
+
+      <label class="quantity-label" for="quantidade">
+        Quantos Robux você deseja?
+      </label>
+
+      <div class="quantity-control">
+        <button type="button" id="diminuir"
+          aria-label="Diminuir 100 Robux">−</button>
+
+        <input
+          type="number"
+          id="quantidade"
+          value="100"
+          min="100"
+          max="1000000"
+          step="100"
+          inputmode="numeric"
+          aria-describedby="ajudaQuantidade"
+        >
+
+        <button type="button" id="aumentar"
+          aria-label="Aumentar 100 Robux">+</button>
+      </div>
+
+      <p class="muted" id="ajudaQuantidade">
+        Use os botões para alterar de 100 em 100 ou digite a quantidade.
+      </p>
+
+      <div class="quick-quantities" aria-label="Quantidades rápidas">
+        <button type="button" data-quantidade="400">400</button>
+        <button type="button" data-quantidade="800">800</button>
+        <button type="button" data-quantidade="1000">1.000</button>
+        <button type="button" data-quantidade="2000">2.000</button>
+      </div>
+
+      <div class="total" aria-live="polite">
+        <small>Valor calculado do pedido</small>
+        <strong id="total">R$ 6,00</strong>
+        <small id="resumo">100 Robux selecionados</small>
+      </div>
+
+      <button type="button" class="buy" id="pedir">
+        📲 Solicitar pelo WhatsApp
+      </button>
+
+      <a class="secondary"
+        href="https://www.roblox.com/upgrades/robux"
+        target="_blank"
+        rel="noopener noreferrer">
+        Consultar opções oficiais do Roblox
+      </a>
     </div>
-  </div>
 
-  <div class="filter-section">
-    <h3>🧬 Mutações</h3>
-    <div class="filters" id="mutationFilters">
-      <button class="filter active" data-mutation="">Todas</button>
-      <button class="filter" data-mutation="Default">Normal</button>
-      <button class="filter" data-mutation="Gold">Gold</button>
-      <button class="filter" data-mutation="Diamond">Diamond</button>
-      <button class="filter" data-mutation="Rainbow">Rainbow</button>
-      <button class="filter" data-mutation="Bloodrot">Bloodrot</button>
-      <button class="filter" data-mutation="Candy">Candy</button>
-      <button class="filter" data-mutation="Lava">Lava</button>
-      <button class="filter" data-mutation="Galaxy">Galaxy</button>
-      <button class="filter" data-mutation="Yin Yang">Yin Yang</button>
-      <button class="filter" data-mutation="Radioactive">Radioactive</button>
-      <button class="filter" data-mutation="Cursed">Cursed</button>
-      <button class="filter" data-mutation="Divine">Divine</button>
-      <button class="filter" data-mutation="Cyber">Cyber</button>
-      <button class="filter" data-mutation="Phantom">Phantom</button>
-      <button class="filter" data-mutation="Crystal">Crystal</button>
-      <button class="filter" data-mutation="Eclipse">Eclipse</button>
+    <div class="notice">
+      <strong>Importante:</strong> o preço exibido é uma simulação
+      proporcional a R$ 6,00 por 100 Robux. A solicitação pelo WhatsApp
+      não confirma pagamento, disponibilidade ou entrega. Confirme as
+      condições com o vendedor antes de pagar.
     </div>
-  </div>
+  </section>
 
-  <p class="muted">Os filtros ajudam a localizar os personagens. Confirme a disponibilidade e o preço antes de comprar.</p>
-  <div class="grid" id="catalog"></div>
-</section>
+  <section class="panel" id="contato">
+    <h2>📞 Atendimento</h2>
+    <p class="muted">
+      Entre em contato para tirar dúvidas sobre sua solicitação.
+    </p>
 
-<section class="panel" id="robux">
-  <h2>💎 Robux</h2>
-  <p class="muted">Consulte as opções oficiais de Robux.</p>
-  <div class="notice">
-    Os valores dos pacotes variam conforme a plataforma e a região.
-    Confira os preços diretamente no Roblox oficial.
-  </div>
-  <div class="grid" id="robuxGrid"></div>
-</section>
+    <div class="contact-list">
+      <div class="contact-item">
+        <h3>💬 WhatsApp da loja</h3>
+        <p class="muted">
+          Fale com a gente sobre quantidades, valores e pedidos.
+        </p>
+        <button class="buy" id="contatoWhatsApp">
+          Abrir atendimento
+        </button>
+      </div>
 
-<section class="panel" id="contato">
-  <h2>📞 Atendimento</h2>
-  <div class="notice">
-    Clique em “Consultar produto” em um Brainrot para iniciar uma consulta.
-    Para habilitar o atendimento automático, configure seu WhatsApp no código.
-    Nunca peça a senha da conta Roblox de um cliente.
-  </div>
-  <p><a href="https://www.roblox.com/" target="_blank" rel="noopener noreferrer" style="color:#d6aaff">Acessar o Roblox oficial</a></p>
-</section>
+      <div class="contact-item">
+        <h3>🎮 Roblox oficial</h3>
+        <p class="muted">
+          Consulte as opções disponíveis diretamente na plataforma.
+        </p>
+        <a class="secondary"
+          href="https://www.roblox.com/upgrades/robux"
+          target="_blank"
+          rel="noopener noreferrer">
+          Acessar Roblox
+        </a>
+      </div>
+    </div>
+
+    <div class="notice">
+      Nunca compartilhe sua senha, códigos de verificação ou dados
+      de autenticação da sua conta Roblox.
+    </div>
+  </section>
+
 </main>
 
 <footer>
-  © 2026 Brainrot Store · Loja independente, sem afiliação à Roblox Corporation.
+  © 2026 Robux Store · Loja independente, sem afiliação oficial
+  à Roblox Corporation.<br>
+  Robux é uma marca registrada da Roblox Corporation.
 </footer>
 
 <script>
-/* Configure com DDI + DDD + número, somente dígitos.
-   Exemplo de formato: 5511999999999 */
-const WHATSAPP = "";
+"use strict";
 
-const exemplos = [
-  ["Noobini Pizzanini","Common"],
-  ["Tim Cheese","Common"],
-  ["Lirilì Larilà","Common"],
-  ["Fluriflura","Common"],
-  ["Trippi Troppi","Rare"],
-  ["Bandito Bobritto","Rare"],
-  ["Cappuccino Assassino","Epic"],
-  ["Brr Brr Patapim","Epic"],
-  ["Ballerina Cappuccina","Legendary"],
-  ["Burbaloni Loliloli","Legendary"],
-  ["Chimpanzini Bananini","Legendary"],
-  ["Tung Tung Tung Sahur","Mythic"],
-  ["Bombardiro Crocodilo","Mythic"],
-  ["Gorilla Watermelondrillo","Brainrot God"],
-  ["Cocofanto Elefanto","Brainrot God"],
-  ["La Vacca Saturno Saturnita","Secret"],
-  ["Strawberry Elephant","OG"],
-  ["Meowl","OG"]
-].map(([name,rarity]) => ({name,rarity}));
+/* Número do WhatsApp com DDI + DDD, somente dígitos. */
+const WHATSAPP = "5511974331932";
 
-let brainrots = [];
-let filtroRapido = "";
-let filtroMutacao = "";
+const PRECO_POR_100 = 6;
+const PASSO = 100;
+const MINIMO = 100;
+const MAXIMO = 1000000;
 
-function nomeItem(item) {
-  return item.name || item.nome || item.title ||
-    item.brainrot || item.displayName || "Brainrot";
+const quantidadeInput = document.getElementById("quantidade");
+const totalEl = document.getElementById("total");
+const resumoEl = document.getElementById("resumo");
+
+function moeda(valor) {
+  return valor.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  });
 }
 
-function raridadeItem(item) {
-  return item.rarity || item.raridade || item.tier ||
-    item.rarityName || "Outros";
+function formatarNumero(valor) {
+  return valor.toLocaleString("pt-BR");
 }
 
-function mutacaoItem(item) {
-  return item.mutation || item.mutacao ||
-    item.mutationName || item.variant || item.variation || "";
-}
+function obterQuantidade() {
+  let quantidade = Number(quantidadeInput.value);
 
-function imagemItem(item) {
-  const possiveis = [
-    item.image_url, item.imageUrl, item.image,
-    item.thumbnail, item.thumbnailUrl, item.icon,
-    item.img, item.picture, item.imageURL
-  ];
-
-  for (const valor of possiveis) {
-    if (typeof valor === "string" && /^https?:\/\//i.test(valor)) {
-      return valor;
-    }
-    if (valor && typeof valor === "object") {
-      const url = valor.url || valor.src || valor.uri;
-      if (typeof url === "string" && /^https?:\/\//i.test(url)) {
-        return url;
-      }
-    }
-  }
-  return "";
-}
-
-function criarImagem(item, art) {
-  const fallback = document.createElement("div");
-  fallback.className = "fallback";
-  fallback.textContent = "🧠";
-
-  const url = imagemItem(item);
-  if (!url) {
-    art.appendChild(fallback);
-    return;
+  if (!Number.isFinite(quantidade)) {
+    quantidade = MINIMO;
   }
 
-  const img = document.createElement("img");
-  img.alt = nomeItem(item);
-  img.loading = "lazy";
-  img.src = url;
-  img.onerror = () => {
-    img.remove();
-    if (!art.contains(fallback)) art.appendChild(fallback);
-  };
-  art.appendChild(img);
+  quantidade = Math.round(quantidade / PASSO) * PASSO;
+  quantidade = Math.max(MINIMO, Math.min(MAXIMO, quantidade));
+
+  return quantidade;
 }
 
-function consultar(nome, categoria, mutacao = "") {
-  const variante = mutacao && mutacao !== "Default"
-    ? `, mutação ${mutacao}` : "";
-  const msg = `Olá! Quero consultar ${nome}${variante} (${categoria}) na Brainrot Store.`;
+function atualizarPreco() {
+  const quantidade = obterQuantidade();
 
-  if (WHATSAPP) {
-    window.open(
-      "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg),
-      "_blank",
-      "noopener,noreferrer"
+  quantidadeInput.value = quantidade;
+
+  const preco = quantidade / PASSO * PRECO_POR_100;
+
+  totalEl.textContent = moeda(preco);
+  resumoEl.textContent =
+    formatarNumero(quantidade) + " Robux selecionados";
+
+  return { quantidade, preco };
+}
+
+function abrirWhatsApp(mensagem) {
+  const url = "https://wa.me/" + WHATSAPP +
+    "?text=" + encodeURIComponent(mensagem);
+
+  window.open(url, "_blank", "noopener,noreferrer");
+}
+
+document.getElementById("diminuir").addEventListener("click", () => {
+  quantidadeInput.value = obterQuantidade() - PASSO;
+  atualizarPreco();
+});
+
+document.getElementById("aumentar").addEventListener("click", () => {
+  quantidadeInput.value = obterQuantidade() + PASSO;
+  atualizarPreco();
+});
+
+quantidadeInput.addEventListener("change", atualizarPreco);
+quantidadeInput.addEventListener("input", () => {
+  if (quantidadeInput.value !== "") {
+    const quantidade = Number(quantidadeInput.value);
+
+    if (Number.isFinite(quantidade) && quantidade > 0) {
+      const preco = quantidade / PASSO * PRECO_POR_100;
+      totalEl.textContent = moeda(preco);
+      resumoEl.textContent =
+        formatarNumero(Math.floor(quantidade)) +
+        " Robux selecionados";
+    }
+  }
+});
+
+document.querySelectorAll("[data-quantidade]").forEach(botao => {
+  botao.addEventListener("click", () => {
+    quantidadeInput.value = botao.dataset.quantidade;
+    atualizarPreco();
+  });
+});
+
+document.getElementById("pedir").addEventListener("click", () => {
+  const { quantidade, preco } = atualizarPreco();
+
+  const mensagem =
+    "Olá! Vim pela Robux Store e gostaria de solicitar um pedido.\n\n" +
+    "Quantidade: " + formatarNumero(quantidade) + " Robux\n" +
+    "Preço por 100 Robux: R$ 6,00\n" +
+    "Total calculado: " + moeda(preco) + "\n\n" +
+    "Gostaria de confirmar a disponibilidade e as condições do pedido.";
+
+  abrirWhatsApp(mensagem);
+});
+
+document.getElementById("contatoWhatsApp")
+  .addEventListener("click", () => {
+    abrirWhatsApp(
+      "Olá! Vim pelo site Robux Store e gostaria de falar com o atendimento."
     );
-  } else {
-    alert(msg + "\n\nO atendimento ainda não foi configurado.");
-  }
-}
-
-function cardBrainrot(item) {
-  const card = document.createElement("article");
-  card.className = "card";
-
-  const art = document.createElement("div");
-  art.className = "art";
-  criarImagem(item, art);
-
-  const info = document.createElement("div");
-  info.className = "info";
-
-  const h = document.createElement("h3");
-  h.textContent = nomeItem(item);
-
-  const tag = document.createElement("span");
-  tag.className = "rarity";
-  tag.textContent = raridadeItem(item);
-
-  info.append(h, tag);
-
-  const mutacaoOriginal = mutacaoItem(item);
-  const mutacaoExibida = filtroMutacao || mutacaoOriginal;
-
-  if (mutacaoExibida) {
-    const mutacaoTag = document.createElement("span");
-    mutacaoTag.className = "mutation-label";
-    mutacaoTag.textContent = mutacaoExibida === "Default"
-      ? "Normal" : mutacaoExibida;
-    info.appendChild(mutacaoTag);
-  }
-
-  const price = document.createElement("div");
-  price.className = "price";
-  price.textContent = item.price || item.preco || "Consultar preço";
-
-  const btn = document.createElement("button");
-  btn.className = "buy";
-  btn.textContent = "Consultar produto";
-  btn.onclick = () => consultar(
-    nomeItem(item),
-    raridadeItem(item),
-    mutacaoExibida
-  );
-
-  info.append(price, btn);
-  card.append(art, info);
-  return card;
-}
-
-function renderCatalog() {
-  const grid = document.getElementById("catalog");
-  const q = document.getElementById("search").value.trim().toLowerCase();
-  grid.replaceChildren();
-
-  const encontrados = brainrots.filter(item => {
-    const nome = nomeItem(item).toLowerCase();
-    const raridade = raridadeItem(item).toLowerCase();
-    const mutacao = mutacaoItem(item).toLowerCase();
-
-    const nomeOK = nome.includes(q);
-    const categoriaOK = !filtroRapido ||
-      raridade === filtroRapido.toLowerCase();
-
-    /* A mutação selecionada funciona como variante para consulta.
-       Se a fonte tiver mutações cadastradas, elas também são filtradas. */
-    const mutacaoOK = !filtroMutacao ||
-      filtroMutacao === "Default" ||
-      !mutacao ||
-      mutacao === filtroMutacao.toLowerCase();
-
-    return nomeOK && categoriaOK && mutacaoOK;
   });
 
-  if (!encontrados.length) {
-    const vazio = document.createElement("div");
-    vazio.className = "no-results";
-    vazio.textContent = "Nenhum Brainrot encontrado com esses filtros.";
-    grid.appendChild(vazio);
-  } else {
-    encontrados.forEach(item => grid.appendChild(cardBrainrot(item)));
-  }
+document.querySelectorAll("nav button").forEach(botao => {
+  botao.addEventListener("click", () => {
+    document.querySelectorAll("nav button").forEach(item => {
+      item.classList.remove("active");
+    });
 
-  document.getElementById("status").textContent =
-    encontrados.length + " Brainrots encontrados.";
-}
+    document.querySelectorAll(".panel").forEach(painel => {
+      painel.classList.remove("active");
+    });
 
-function atualizarBotoes(containerId, atributo, valor) {
-  document.querySelectorAll(`#${containerId} .filter`).forEach(btn => {
-    btn.classList.toggle("active", btn.dataset[atributo] === valor);
-  });
-}
+    botao.classList.add("active");
+    document.getElementById(botao.dataset.tab).classList.add("active");
 
-document.getElementById("search").addEventListener("input", renderCatalog);
-
-document.querySelectorAll("#categoryFilters .filter").forEach(btn => {
-  btn.addEventListener("click", () => {
-    filtroRapido = btn.dataset.rarity;
-    atualizarBotoes("categoryFilters", "rarity", filtroRapido);
-    renderCatalog();
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 });
 
-document.querySelectorAll("#mutationFilters .filter").forEach(btn => {
-  btn.addEventListener("click", () => {
-    filtroMutacao = btn.dataset.mutation;
-    atualizarBotoes("mutationFilters", "mutation", filtroMutacao);
-    renderCatalog();
-  });
-});
-
-document.querySelectorAll("nav button").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
-    document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
-    btn.classList.add("active");
-    document.getElementById(btn.dataset.tab).classList.add("active");
-  });
-});
-
-async function carregarCatalogo() {
-  const url = "https://raw.githubusercontent.com/jwcool3/BR-Tracker/main/app/public/brainrots.json";
-
-  try {
-    const resposta = await fetch(url);
-    if (!resposta.ok) throw new Error("Catálogo indisponível");
-
-    const dados = await resposta.json();
-    const lista = Array.isArray(dados)
-      ? dados
-      : (dados.brainrots || dados.items || dados.data || []);
-
-    if (!Array.isArray(lista) || !lista.length) {
-      throw new Error("Formato inesperado");
-    }
-
-    brainrots = lista;
-    document.getElementById("status").textContent =
-      "Catálogo comunitário carregado. As imagens dependem da fonte.";
-  } catch (erro) {
-    brainrots = exemplos;
-    document.getElementById("status").textContent =
-      "Catálogo de demonstração: a fonte externa não carregou.";
-  }
-
-  renderCatalog();
-}
-
-const pacotes = [
-  {nome:"Consultar Robux",emoji:"💎"},
-  {nome:"Pacotes de Robux",emoji:"💰"},
-  {nome:"Robux pelo canal oficial",emoji:"✨"}
-];
-
-const robuxGrid = document.getElementById("robuxGrid");
-
-pacotes.forEach(p => {
-  const card = document.createElement("article");
-  card.className = "card";
-
-  const art = document.createElement("div");
-  art.className = "art";
-  art.textContent = p.emoji;
-
-  const info = document.createElement("div");
-  info.className = "info";
-
-  const h = document.createElement("h3");
-  h.textContent = p.nome;
-
-  const price = document.createElement("div");
-  price.className = "price";
-  price.textContent = "Consultar";
-
-  const btn = document.createElement("button");
-  btn.className = "buy";
-  btn.textContent = "Ver opções oficiais";
-  btn.onclick = () => window.open(
-    "https://www.roblox.com/upgrades/robux",
-    "_blank",
-    "noopener,noreferrer"
-  );
-
-  info.append(h, price, btn);
-  card.append(art, info);
-  robuxGrid.appendChild(card);
-});
-
-carregarCatalogo();
+atualizarPreco();
 </script>
+
 </body>
 </html>
