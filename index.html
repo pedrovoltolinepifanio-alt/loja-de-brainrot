@@ -1,0 +1,615 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brainrot Store</title>
+
+<style>
+:root {
+  --bg: #0b0912;
+  --card: #171323;
+  --purple: #9d4dff;
+  --pink: #ff48ca;
+  --muted: #b8afc9;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  padding: 20px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #30243e;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.logo span { color: var(--pink); }
+
+nav {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+button, input, select { font: inherit; }
+
+nav button, .filter {
+  background: #21182e;
+  color: white;
+  border: 1px solid #423054;
+  padding: 11px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+nav button.active, .filter.active {
+  background: var(--purple);
+}
+
+.hero {
+  text-align: center;
+  padding: 65px 18px;
+  background: radial-gradient(ellipse at top, #492064, var(--bg) 72%);
+}
+
+.hero h1 {
+  font-size: clamp(36px, 7vw, 64px);
+  margin: 20px 0;
+}
+
+.hero h1 span { color: var(--pink); }
+
+.hero p, .muted {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+main {
+  max-width: 1400px;
+  margin: auto;
+  padding: 30px 5%;
+}
+
+.panel { display: none; }
+.panel.active { display: block; }
+
+.tools {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.tools input, .tools select {
+  flex: 1;
+  min-width: 180px;
+  padding: 13px;
+  background: var(--card);
+  color: white;
+  border: 1px solid #423054;
+  border-radius: 10px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid #30243e;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: .2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--purple);
+}
+
+.art {
+  height: 190px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #34204d, #191025);
+  font-size: 60px;
+  overflow: hidden;
+  position: relative;
+}
+
+.art img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 10px;
+  display: block;
+}
+
+.art .fallback {
+  display: none;
+  font-size: 65px;
+}
+
+.info { padding: 15px; }
+
+.info h3 {
+  font-size: 16px;
+  margin: 0 0 10px;
+  overflow-wrap: anywhere;
+}
+
+.rarity {
+  display: inline-block;
+  background: #352344;
+  color: #e2c7ff;
+  padding: 5px 8px;
+  border-radius: 7px;
+  font-size: 11px;
+}
+
+.price {
+  font-size: 21px;
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+.buy {
+  width: 100%;
+  padding: 12px;
+  background: var(--purple);
+  color: white;
+  border: 0;
+  border-radius: 9px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.buy:hover { background: var(--pink); }
+
+.notice {
+  padding: 16px;
+  background: #171323;
+  border: 1px solid #30243e;
+  border-radius: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 20px 0;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: var(--muted);
+  border-top: 1px solid #30243e;
+  font-size: 13px;
+}
+
+@media (max-width: 500px) {
+  header { justify-content: center; }
+  .logo { text-align: center; }
+  nav { justify-content: center; }
+  .art { height: 165px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🧠 BRAINROT<span> STORE</span></div>
+
+  <nav>
+    <button class="active" data-tab="brainrots">🧠 Brainrots</button>
+    <button data-tab="robux">💎 Robux</button>
+    <button data-tab="contato">📞 Contato</button>
+  </nav>
+</header>
+
+<div class="hero">
+  <div>🎮 SUA LOJA GAMER</div>
+  <h1>SUBA DE NÍVEL<br><span>NO ROBLOX</span></h1>
+  <p>Encontre seus Brainrots favoritos e consulte os produtos disponíveis.</p>
+</div>
+
+<main>
+
+<section class="panel active" id="brainrots">
+  <h2>🧠 Catálogo de Brainrots</h2>
+  <p class="muted" id="status">Carregando catálogo...</p>
+
+  <div class="tools">
+    <input id="search" placeholder="🔎 Buscar Brainrot pelo nome...">
+
+    <select id="rarity">
+      <option value="">Todas as raridades</option>
+      <option>Common</option>
+      <option>Rare</option>
+      <option>Epic</option>
+      <option>Legendary</option>
+      <option>Mythic</option>
+      <option>Brainrot God</option>
+      <option>God</option>
+      <option>Secret</option>
+      <option>OG</option>
+      <option>Misc</option>
+    </select>
+  </div>
+
+  <div class="filters">
+    <button class="filter active" data-rarity="">Todos</button>
+    <button class="filter" data-rarity="Common">Common</button>
+    <button class="filter" data-rarity="Rare">Rare</button>
+    <button class="filter" data-rarity="Epic">Epic</button>
+    <button class="filter" data-rarity="Legendary">Legendary</button>
+    <button class="filter" data-rarity="Mythic">Mythic</button>
+    <button class="filter" data-rarity="Brainrot God">Brainrot God</button>
+    <button class="filter" data-rarity="Secret">Secret</button>
+    <button class="filter" data-rarity="OG">OG</button>
+  </div>
+
+  <div class="grid" id="catalog"></div>
+</section>
+
+<section class="panel" id="robux">
+  <h2>💎 Robux</h2>
+  <p class="muted">Consulte as opções para adquirir Robux.</p>
+
+  <div class="notice">
+    Os pacotes abaixo são apenas categorias de exemplo.
+    Confira os valores e compre Robux pelos canais oficiais.
+  </div>
+
+  <div class="grid" id="robuxGrid"></div>
+</section>
+
+<section class="panel" id="contato">
+  <h2>📞 Atendimento</h2>
+
+  <div class="notice">
+    Para consultar um produto, use os botões da loja.
+    Configure seu WhatsApp no código antes de publicar.
+    Nunca peça a senha da conta Roblox de um cliente.
+  </div>
+
+  <p>
+    <a href="https://www.roblox.com/"
+       target="_blank"
+       rel="noopener noreferrer"
+       style="color:#d6aaff">
+       Acessar o Roblox oficial
+    </a>
+  </p>
+</section>
+
+</main>
+
+<footer>
+  © 2026 Brainrot Store · Loja independente, sem afiliação à Roblox Corporation.
+</footer>
+
+<script>
+/* Coloque seu WhatsApp com DDI e DDD, somente números.
+   Exemplo de formato: 5511999999999 */
+const WHATSAPP = "";
+
+const exemplos = [
+  ["Noobini Pizzanini", "Common"],
+  ["Tim Cheese", "Common"],
+  ["Lirilì Larilà", "Common"],
+  ["Fluriflura", "Common"],
+  ["Trippi Troppi", "Rare"],
+  ["Bandito Bobritto", "Rare"],
+  ["Cappuccino Assassino", "Epic"],
+  ["Brr Brr Patapim", "Epic"],
+  ["Ballerina Cappuccina", "Legendary"],
+  ["Burbaloni Loliloli", "Legendary"],
+  ["Chimpanzini Bananini", "Legendary"],
+  ["Tung Tung Tung Sahur", "Mythic"],
+  ["Bombardiro Crocodilo", "Mythic"],
+  ["Gorilla Watermelondrillo", "Brainrot God"],
+  ["Cocofanto Elefanto", "Brainrot God"],
+  ["La Vacca Saturno Saturnita", "Secret"],
+  ["Strawberry Elephant", "OG"],
+  ["Meowl", "OG"]
+].map(([name, rarity]) => ({ name, rarity }));
+
+let brainrots = [];
+let filtroRapido = "";
+
+function nomeItem(item) {
+  return item.name || item.nome || item.title ||
+         item.brainrot || item.displayName || "Brainrot";
+}
+
+function raridadeItem(item) {
+  return item.rarity || item.raridade || item.tier ||
+         item.rarityName || "Outros";
+}
+
+/* Tenta reconhecer diferentes nomes de campos de imagem
+   que podem existir no catálogo. */
+function imagemItem(item) {
+  const possiveis = [
+    item.image_url,
+    item.imageUrl,
+    item.image,
+    item.thumbnail,
+    item.thumbnailUrl,
+    item.icon,
+    item.img,
+    item.picture,
+    item.imageURL,
+    item.image_link,
+    item.imageLink
+  ];
+
+  for (const valor of possiveis) {
+    if (typeof valor === "string" &&
+        /^https?:\/\//i.test(valor)) {
+      return valor;
+    }
+
+    if (valor && typeof valor === "object") {
+      const url = valor.url || valor.src || valor.uri;
+      if (typeof url === "string" &&
+          /^https?:\/\//i.test(url)) {
+        return url;
+      }
+    }
+  }
+
+  return "";
+}
+
+function criarImagem(item, art) {
+  const img = document.createElement("img");
+  const fallback = document.createElement("div");
+
+  fallback.className = "fallback";
+  fallback.textContent = "🧠";
+
+  img.alt = nomeItem(item);
+  img.loading = "lazy";
+
+  img.onerror = () => {
+    img.remove();
+    fallback.style.display = "block";
+  };
+
+  const url = imagemItem(item);
+
+  if (url) {
+    img.src = url;
+  } else {
+    fallback.style.display = "block";
+  }
+
+  art.append(img, fallback);
+}
+
+function cardBrainrot(item) {
+  const card = document.createElement("article");
+  card.className = "card";
+
+  const art = document.createElement("div");
+  art.className = "art";
+  criarImagem(item, art);
+
+  const info = document.createElement("div");
+  info.className = "info";
+
+  const h = document.createElement("h3");
+  h.textContent = nomeItem(item);
+
+  const tag = document.createElement("span");
+  tag.className = "rarity";
+  tag.textContent = raridadeItem(item);
+
+  const price = document.createElement("div");
+  price.className = "price";
+  price.textContent = "Consultar preço";
+
+  const btn = document.createElement("button");
+  btn.className = "buy";
+  btn.textContent = "Consultar produto";
+  btn.onclick = () => consultar(nomeItem(item), "Brainrot");
+
+  info.append(h, tag, price, btn);
+  card.append(art, info);
+
+  return card;
+}
+
+function consultar(nome, categoria) {
+  const msg = `Olá! Quero consultar ${nome} (${categoria}) na Brainrot Store.`;
+
+  if (WHATSAPP) {
+    window.open(
+      "https://wa.me/" + WHATSAPP + "?text=" +
+      encodeURIComponent(msg),
+      "_blank",
+      "noopener,noreferrer"
+    );
+  } else {
+    alert(msg + "\n\nO atendimento ainda não foi configurado.");
+  }
+}
+
+function renderCatalog() {
+  const grid = document.getElementById("catalog");
+  const q = document.getElementById("search").value
+    .trim().toLowerCase();
+
+  const rarity = document.getElementById("rarity").value ||
+    filtroRapido;
+
+  grid.replaceChildren();
+
+  const encontrados = brainrots.filter(item =>
+    nomeItem(item).toLowerCase().includes(q) &&
+    (!rarity ||
+      raridadeItem(item).toLowerCase() === rarity.toLowerCase())
+  );
+
+  encontrados.forEach(item => {
+    grid.appendChild(cardBrainrot(item));
+  });
+
+  document.getElementById("status").textContent =
+    encontrados.length + " Brainrots encontrados no catálogo carregado.";
+
+  if (!encontrados.length) {
+    grid.textContent = "Nenhum Brainrot encontrado. Tente outra busca.";
+  }
+}
+
+async function carregarCatalogo() {
+  const url =
+    "https://raw.githubusercontent.com/jwcool3/BR-Tracker/main/app/public/brainrots.json";
+
+  try {
+    const resposta = await fetch(url);
+
+    if (!resposta.ok) {
+      throw new Error("Catálogo indisponível");
+    }
+
+    const dados = await resposta.json();
+
+    const lista = Array.isArray(dados) ? dados :
+      (dados.brainrots || dados.items || dados.data || []);
+
+    if (!Array.isArray(lista) || !lista.length) {
+      throw new Error("Formato inesperado");
+    }
+
+    brainrots = lista;
+
+    document.getElementById("status").textContent =
+      "Catálogo comunitário carregado. As imagens dependem dos links fornecidos pela fonte.";
+
+  } catch (e) {
+    brainrots = exemplos;
+
+    document.getElementById("status").textContent =
+      "Não foi possível carregar o catálogo completo. Mostrando personagens de exemplo.";
+  }
+
+  renderCatalog();
+}
+
+document.getElementById("search")
+  .addEventListener("input", renderCatalog);
+
+document.getElementById("rarity")
+  .addEventListener("change", () => {
+    filtroRapido = "";
+
+    document.querySelectorAll(".filter")
+      .forEach(b => b.classList.remove("active"));
+
+    document.querySelector('[data-rarity=""]')
+      .classList.add("active");
+
+    renderCatalog();
+  });
+
+document.querySelectorAll(".filter").forEach(btn => {
+  btn.addEventListener("click", () => {
+    filtroRapido = btn.dataset.rarity;
+    document.getElementById("rarity").value = "";
+
+    document.querySelectorAll(".filter")
+      .forEach(b => b.classList.remove("active"));
+
+    btn.classList.add("active");
+    renderCatalog();
+  });
+});
+
+document.querySelectorAll("nav button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll("nav button")
+      .forEach(b => b.classList.remove("active"));
+
+    document.querySelectorAll(".panel")
+      .forEach(p => p.classList.remove("active"));
+
+    btn.classList.add("active");
+
+    document.getElementById(btn.dataset.tab)
+      .classList.add("active");
+  });
+});
+
+/* Pacotes demonstrativos: os valores não são preços reais. */
+const pacotes = [
+  { nome: "Robux — pacote básico", emoji: "💎" },
+  { nome: "Robux — pacote intermediário", emoji: "💰" },
+  { nome: "Robux — pacote especial", emoji: "✨" }
+];
+
+const robuxGrid = document.getElementById("robuxGrid");
+
+pacotes.forEach(p => {
+  const card = document.createElement("article");
+  card.className = "card";
+
+  const art = document.createElement("div");
+  art.className = "art";
+  art.textContent = p.emoji;
+
+  const info = document.createElement("div");
+  info.className = "info";
+
+  const h = document.createElement("h3");
+  h.textContent = p.nome;
+
+  const price = document.createElement("div");
+  price.className = "price";
+  price.textContent = "Consultar";
+
+  const btn = document.createElement("button");
+  btn.className = "buy";
+  btn.textContent = "Ver opções oficiais";
+  btn.onclick = () => window.open(
+    "https://www.roblox.com/upgrades/robux",
+    "_blank",
+    "noopener,noreferrer"
+  );
+
+  info.append(h, price, btn);
+  card.append(art, info);
+  robuxGrid.appendChild(card);
+});
+
+carregarCatalogo();
+</script>
+
+</body>
+</html>
