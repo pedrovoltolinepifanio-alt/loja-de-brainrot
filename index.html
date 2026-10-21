@@ -1,11 +1,11 @@
-
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0b0912">
-<meta name="description" content="Loja de Robux. Consulte quantidades e preços e entre em contato pelo WhatsApp.">
+<meta name="description" content="Loja de Robux. Escolha a quantidade e entre em contato pelo Discord.">
 <title>Robux Store | Sua Loja Gamer</title>
 
 <style>
@@ -36,10 +36,7 @@ header {
   border-bottom: 1px solid var(--border);
 }
 
-.logo {
-  font-size: 24px;
-  font-weight: 900;
-}
+.logo { font-size: 24px; font-weight: 900; }
 .logo span { color: var(--pink); }
 
 nav {
@@ -204,9 +201,7 @@ h2 { font-size: 28px; }
   border-radius: 9px;
 }
 
-.quick-quantities button:hover {
-  border-color: var(--pink);
-}
+.quick-quantities button:hover { border-color: var(--pink); }
 
 .total {
   text-align: center;
@@ -243,6 +238,7 @@ h2 { font-size: 28px; }
 }
 
 .buy:hover { filter: brightness(1.12); }
+
 .buy:focus-visible, button:focus-visible {
   outline: 2px solid white;
   outline-offset: 3px;
@@ -302,14 +298,14 @@ footer {
 
   <nav aria-label="Navegação principal">
     <button class="active" data-tab="robux">💎 Comprar Robux</button>
-    <button data-tab="contato">📞 Contato</button>
+    <button data-tab="contato">💬 Discord</button>
   </nav>
 </header>
 
 <section class="hero">
   <div class="eyebrow">🎮 SUA LOJA GAMER</div>
   <h1>SEU UNIVERSO<br><span>É NO ROBLOX</span></h1>
-  <p>Escolha a quantidade de Robux e consulte seu pedido pelo WhatsApp.</p>
+  <p>Escolha a quantidade de Robux e fale com a gente pelo Discord.</p>
 </section>
 
 <main>
@@ -369,32 +365,32 @@ footer {
       </div>
 
       <button type="button" class="buy" id="pedir">
-        📲 Solicitar pelo WhatsApp
+        💬 Solicitar pelo Discord
       </button>
     </div>
 
     <div class="notice">
       <strong>Importante:</strong> o preço exibido é uma simulação
-      proporcional a R$ 6,00 por 100 Robux. A solicitação pelo WhatsApp
-      não confirma pagamento, disponibilidade ou entrega. Confirme as
-      condições com o vendedor antes de pagar.
+      proporcional a R$ 6,00 por 100 Robux. Ao solicitar pelo Discord,
+      confirme a disponibilidade, as condições e o valor final antes de pagar.
     </div>
   </section>
 
   <section class="panel" id="contato">
-    <h2>📞 Atendimento</h2>
+    <h2>💬 Atendimento pelo Discord</h2>
     <p class="muted">
-      Entre em contato para tirar dúvidas sobre sua solicitação.
+      Entre no nosso servidor para tirar dúvidas sobre quantidades,
+      valores e pedidos.
     </p>
 
     <div class="contact-list">
       <div class="contact-item">
-        <h3>💬 WhatsApp da loja</h3>
+        <h3>🎮 Servidor oficial da loja</h3>
         <p class="muted">
-          Fale com a gente sobre quantidades, valores e pedidos.
+          Clique abaixo para entrar no nosso servidor do Discord.
         </p>
-        <button class="buy" id="contatoWhatsApp">
-          Abrir atendimento
+        <button class="buy" id="contatoDiscord">
+          Entrar no Discord
         </button>
       </div>
     </div>
@@ -416,7 +412,7 @@ footer {
 <script>
 "use strict";
 
-const WHATSAPP = "5511974331932";
+const DISCORD = "https://discord.gg/KV4EWUXeN";
 
 const PRECO_POR_100 = 6;
 const PASSO = 100;
@@ -464,11 +460,8 @@ function atualizarPreco() {
   return { quantidade, preco };
 }
 
-function abrirWhatsApp(mensagem) {
-  const url = "https://wa.me/" + WHATSAPP +
-    "?text=" + encodeURIComponent(mensagem);
-
-  window.open(url, "_blank", "noopener,noreferrer");
+function abrirDiscord() {
+  window.open(DISCORD, "_blank", "noopener,noreferrer");
 }
 
 document.getElementById("diminuir").addEventListener("click", () => {
@@ -505,24 +498,12 @@ document.querySelectorAll("[data-quantidade]").forEach(botao => {
 });
 
 document.getElementById("pedir").addEventListener("click", () => {
-  const { quantidade, preco } = atualizarPreco();
-
-  const mensagem =
-    "Olá! Vim pela Robux Store e gostaria de solicitar um pedido.\n\n" +
-    "Quantidade: " + formatarNumero(quantidade) + " Robux\n" +
-    "Preço por 100 Robux: R$ 6,00\n" +
-    "Total calculado: " + moeda(preco) + "\n\n" +
-    "Gostaria de confirmar a disponibilidade e as condições do pedido.";
-
-  abrirWhatsApp(mensagem);
+  atualizarPreco();
+  abrirDiscord();
 });
 
-document.getElementById("contatoWhatsApp")
-  .addEventListener("click", () => {
-    abrirWhatsApp(
-      "Olá! Vim pelo site Robux Store e gostaria de falar com o atendimento."
-    );
-  });
+document.getElementById("contatoDiscord")
+  .addEventListener("click", abrirDiscord);
 
 document.querySelectorAll("nav button").forEach(botao => {
   botao.addEventListener("click", () => {
@@ -546,3 +527,4 @@ atualizarPreco();
 
 </body>
 </html>
+```
